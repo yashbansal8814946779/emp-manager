@@ -1,0 +1,93 @@
+{% extends 'emp_base.html' %}
+
+{% block main %}
+
+<div class="card shadow m-2">
+  <div class="card-body">
+    <h5 class="p-2 text-danger" style="border-bottom : 2px solid orange"> Profile </h5>
+
+    <div class="container-fluid">
+      <form method ="post" name="singup" onsubmit="return checkpassword()">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>First Name </label>
+              <input type="text" name="firstname" class="form-control" placeholder="Enter First Name" value = "{{employee.user.first_name}}">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Last Name </label>
+              <input type="text" name="lastname" class="form-control" placeholder="Enter Last Name" value = "{{employee.user.last_name}}">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Employee  designation</label>
+              <input type="text" name="designation" class="form-control" placeholder="Enter Employee designation" value = "{{employee.designation}}">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Employee Department</label>
+              <input type="text" name="department" class="form-control" placeholder="Enter Employee department" value = "{{employee.empdept}}" >
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Employee Code </label>
+              <input type="text" name="empcode" class="form-control" placeholder="Enter Employee Code" value = "{{employee.empcode}}">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Employee Contact </label>
+              <input type="text" name="contact" class="form-control" placeholder="Enter Employee contact" value = "{{employee.contact}}">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Employee Email </label>
+              <input type="email" name="email" class="form-control" placeholder="Enter Employee Email"value = "{{employee.user.username}}">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Joining date [{{employee.joiningdate}}] </label>
+              <input type="date" name="jdate" class="form-control">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label> Gender [{{employee.gender}}]</label>
+              <select class="form-control" name="gender">
+                <option value="None">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+
+              </select>
+            </div>
+          </div>
+        </div>
+            <input type="submit" value="submit" class=" m-2 px-3 btn btn-primary">
+
+</form>
+</div>
+</div>
+</div>
+{% if error == "no" %}
+
+<script>
+  alert('Profile updated Successfully');
+  window.location = ('{% url 'profile' %}');
+
+  </script>
+    {% endif %}
+  {% if error == "yes" %}
+    <script>
+      alert('Something went wrong');
+
+      </script>
+    {% endif %}
+{% endblock %}
